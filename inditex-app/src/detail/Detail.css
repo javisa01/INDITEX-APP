@@ -1,0 +1,24 @@
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 20px;
+    border-collapse: collapse;
+  }
+  
+  .image-item {
+    border: 2px solid black;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .grid-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+  
+  .image-info {
+    margin-top: 0px;
+  }
+  
