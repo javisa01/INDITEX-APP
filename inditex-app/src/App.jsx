@@ -17,7 +17,7 @@ function App() {
     backgroundAttachment: 'fixed',
     minHeight: '100vh',
   };
-////  basename='/frolic-front/' 
+
   return (
     <BrowserRouter> 
     <div style = {styles}>
@@ -25,7 +25,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home/>} />
           <Route path='/home' element={ <Home/> } /> 
-          <Route path='/detail' element={ <Detail/> } />       
+          <Route path="/detail" element={<Detail />}/>     
         </Routes>
       </section>
       </div>
