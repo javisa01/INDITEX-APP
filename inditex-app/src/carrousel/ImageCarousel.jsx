@@ -1,4 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
+import Detail from '../detail/Detail'
+import { useNavigate } from 'react-router-dom';
 import image0 from '../images/image0.jpg';
 import image1 from '../images/image1.jpg';
 import image2 from '../images/image2.jpg';
@@ -22,6 +24,7 @@ const images = [
 const ImageCarousel = () => {
   const listRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const navigate = useNavigate(); // Obtiene el objeto de navegación
 
   useEffect(() => {
     const listNode = listRef.current;
@@ -42,7 +45,9 @@ const ImageCarousel = () => {
   };
 
   const handleImageClick = (index) => {
-    alert(`Has hecho clic en la imagen ${index}`);
+    localStorage.setItem('selectedImage', images[index]);
+    // Navega a Detail.jsx con el parámetro de la imagen seleccionada
+    navigate('/detail');
   };
 
   return (
