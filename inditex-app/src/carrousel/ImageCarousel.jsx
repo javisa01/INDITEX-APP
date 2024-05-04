@@ -1,24 +1,21 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Detail from '../detail/Detail'
 import { useNavigate } from 'react-router-dom';
-import image0 from '../images/image0.jpg';
-import image1 from '../images/image1.jpg';
-import image2 from '../images/image2.jpg';
-import image3 from '../images/image3.jpg';
-import image4 from '../images/image4.jpg';
-import image5 from '../images/image5.jpg';
-import image6 from '../images/image6.jpg';
-import image7 from '../images/image7.jpg';
-import image8 from '../images/image8.jpg';
-import image9 from '../images/image9.jpg';
-import image10 from '../images/image10.jpg';
-import image11 from '../images/image11.jpg';
-import image12 from '../images/image12.jpg';
 import './ImageCarousel.css';
 
 const images = [
-  image0, image1, image2, image3, image4, image5, image6,
-  image7, image8, image9, image10, image11, image12
+  "https://static.zara.net/photos///2024/V/0/3/p/5767/521/712/2/w/2048/5767521712_3_1_1.jpg?ts=1707751046435",
+  "https://static.zara.net/photos///2024/V/0/1/p/5862/059/811/2/w/2048/5862059811_3_1_1.jpg?ts=1707511076020",
+  "https://static.zara.net/photos///2024/V/0/1/p/6147/105/427/2/w/2048/6147105427_3_1_1.jpg?ts=1710507096429",
+  "https://static.zara.net/photos///2024/V/0/1/p/2513/750/500/2/w/2048/2513750500_3_1_1.jpg?ts=1706866499269",
+  "https://static.zara.net/photos///2024/V/0/2/p/0840/465/444/2/w/2048/0840465444_3_1_1.jpg?ts=1712655394433",
+  "https://static.zara.net/photos///2024/V/0/3/p/4442/660/712/2/w/2048/4442660712_3_1_1.jpg?ts=1705317447332",
+  "https://static.zara.net/photos///2024/V/1/3/p/4546/330/010/2/w/2048/4546330010_3_1_1.jpg?ts=1708438825678",
+  "https://static.zara.net/photos///2023/I/1/3/p/1251/230/800/2/w/2048/1251230800_3_1_1.jpg?ts=1697466806411",
+  "https://static.zara.net/photos///2023/I/0/2/p/4767/488/723/2/w/2048/4767488723_3_1_1.jpg?ts=1685607087434",
+  "https://static.zara.net/photos///2023/I/0/3/p/6887/602/250/2/w/2048/6887602250_3_1_1.jpg?ts=1689860680377",
+  "https://static.zara.net/photos///2023/I/0/2/p/5847/261/800/2/w/2048/5847261800_3_1_1.jpg?ts=1687417901991",
+  "https://static.zara.net/photos///2024/V/0/1/p/2910/004/701/2/w/2048/2910004701_3_1_1.jpg?ts=1708441849214"
 ];
 
 const ImageCarousel = () => {
@@ -45,8 +42,9 @@ const ImageCarousel = () => {
   };
 
   const handleImageClick = (index) => {
+    // Guarda la URL de la imagen seleccionada en el localStorage
     localStorage.setItem('selectedImage', images[index]);
-    // Navega a Detail.jsx con el parámetro de la imagen seleccionada
+    // Navega a Detail.jsx
     navigate('/detail');
   };
 
