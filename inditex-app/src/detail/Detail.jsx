@@ -17,9 +17,9 @@ function Detail() {
   useEffect(() => {
     // Verificar si hay una imagen seleccionada y hacer la llamada a la API
     if (selectedImage) {
-      axios.get('http://localhost:5000/api/images', { imageUrl: selectedImage })
+      axios.post('http://localhost:5000/api/images', { imageUrl: selectedImage })
         .then(response => {
-          setImageUrls(response.data.image_urls);
+          setImageUrls(response.data);
           setImageDetails(parseImageUrl(selectedImage));
           console.log(response.data); // Puedes hacer algo con la respuesta de la API aquí
         })
