@@ -1,13 +1,12 @@
-// eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState } from 'react';
-import Similarities from './Similarities';
-import Recommendations from './Recommendations';
 import axios from 'axios';
 import Navbar from '../navbar/Navbar';
-import './Detail.css'
+import './Detail.css';
+
 function Detail() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [imageUrls, setImageUrls] = useState([]);
+  const [imageDetails, setImageDetails] = useState(null);
 
   useEffect(() => {
     // Recupera la URL de la imagen seleccionada del localStorage
@@ -15,50 +14,96 @@ function Detail() {
     setSelectedImage(imageFromLocalStorage);
   }, []); // Ejecutar solo una vez al montar el componente
 
-  const generateRandomPrice = () => {
-    return (Math.random() * (150 - 20) + 20).toFixed(2);
-  };
-
-  const sendImageToAPI = () => {
-    // Verificar si hay una imagen seleccionada
+  useEffect(() => {
+    // Verificar si hay una imagen seleccionada y hacer la llamada a la API
     if (selectedImage) {
-      // Enviar la URL de la imagen a la API
       axios.get('http://localhost:5000/api/images', { imageUrl: selectedImage })
         .then(response => {
-            setImageUrls(response.data.image_urls);
+          setImageUrls(response.data.image_urls);
+          setImageDetails(parseImageUrl(selectedImage));
           console.log(response.data); // Puedes hacer algo con la respuesta de la API aquí
         })
         .catch(error => {
           console.error('Error sending image URL to API:', error);
         });
-    } else {
-      console.error('No selected image URL to send to API');
     }
+  }, [selectedImage]); // Ejecutar cuando selectedImage cambie
+
+  const generateRandomPrice = () => {
+    return (Math.random() * (150 - 20) + 20).toFixed(2);
   };
+
+
+  const parseImageUrl = (imageUrl) => {
+    const parts = imageUrl.split('/');
+    const year = parts[parts.indexOf('photos') + 3];
+    const season = parts[parts.indexOf('photos') + 4] === 'V' ? 'Verano' : 'Invierno';
+    const type = parts[parts.indexOf('photos') + 5] === '0' ? 'Ropa' : parts[parts.indexOf('photos') + 5] === '1' ? 'Bambas' : parts[parts.indexOf('photos') + 5] === '2' ? 'Perfumes' : parts[parts.indexOf('photos') + 5] === '3' ? 'Deportes' : 'Deciración de casa';
+    const gender = parts[parts.indexOf('photos') + 6] === '1' ? 'Mujer' : 
+                   parts[parts.indexOf('photos') + 6] === '2' ? 'Hombre' : 'Kids';
+
+    return {
+        year,
+        season,
+        type,
+        gender
+    };
+};
+
 
   return (
     <>
-    <Navbar/>
-    <br/> 
-      {/* Mostrar la imagen seleccionada */}
-      {selectedImage && <img src={selectedImage} alt="Selected Image" />}
-      {/* Renderizar otros componentes, como Similarities y Recommendations */}
-      <Similarities />
+      <Navbar />
 
-      
-      <Recommendations/>
-        <div className="image-grid">
-            {imageUrls.map((imageUrl, index) => (
-                <div key={index} className="image-item">
-                <img src={imageUrl} alt={`Image ${index}`} className="grid-image" />
-                <div className="image-info">
-                    <p>{`${generateRandomPrice()} EUR`}</p>
-                </div>
-                </div>
-            ))}
+      {/* Mostrar la imagen seleccionada */}
+      {selectedImage && (
+        <div className="detail-container">
+          <div className="selected-image-container">
+            <img src={selectedImage} alt="Selected Image" className="selected-image" />
+          </div>
+          <div className="description-container">
+            <p>Esta prenda es perfecta para cualquier ocasión. Su diseño elegante y moderno te hará destacar en cualquier evento.</p>
+            <p>Precio: {`${generateRandomPrice()} EUR`}</p>
+            {imageDetails && (
+              <>
+                <p>Año: {imageDetails.year}</p>
+                <p>Temporada: {imageDetails.season}</p>
+                <p>Tipo de producto: {imageDetails.type}</p>
+                <p>Sección: {imageDetails.gender}</p>
+              </>
+            )}
+          </div>
         </div>
+      )}
+      {/* Renderizar otros componentes, como Similarities y Recommendations */}
+      <br /> <br />
+      <h2>Similarities</h2>
+      <br /> <br />
+      <div className="image-grid-2">
+        {imageUrls.map((imageUrl, index) => (
+          <div key={index} className="image-item-2">
+            <img src={imageUrl} alt={`Image ${index}`} className="grid-image-2" />
+            <div className="image-info-2">
+              <p>{`${generateRandomPrice()} EUR`}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      <br /> <br /> <br />
+      <h2>Recomendations</h2>
+      <br /><br />
+      <div className="image-grid">
+        {imageUrls.map((imageUrl, index) => (
+          <div key={index} className="image-item">
+            <img src={imageUrl} alt={`Image ${index}`} className="grid-image" />
+            <div className="image-info">
+              <p>{`${generateRandomPrice()} EUR`}</p>
+            </div>
+          </div>
+        ))}
+      </div>
       {/* Botón para enviar la imagen a la API */}
-      <button onClick={sendImageToAPI}>Enviar imagen a la API</button>
+      
     </>
   );
 }
