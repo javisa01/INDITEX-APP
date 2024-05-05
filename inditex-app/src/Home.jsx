@@ -21,9 +21,7 @@ const Home = () => {
     return (
         <>    
             <Navbar />
-            <div>
-                hola
-            </div>
+                <br/> <br/> 
             <ImageCarousel />
         </>
       );

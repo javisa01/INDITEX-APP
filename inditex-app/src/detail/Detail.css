@@ -1,6 +1,6 @@
 .image-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(8, 1fr);
     grid-gap: 20px;
     border-collapse: collapse;
   }
@@ -19,6 +19,63 @@
   }
   
   .image-info {
-    margin-top: 0px;
+    margin-top: 10px;
+  }
+
+  .image-grid-2 {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 20px;
+    border-collapse: collapse;
   }
   
+  .image-item-2 {
+    border: 2px solid black;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .grid-image-2 {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+  
+  .image-info-2 {
+    margin-top: 10px;
+  }
+  
+  .detail-container {
+    display: flex;
+    margin-bottom: 20px;
+    height: 650px;
+  }
+  
+  .selected-image-container {
+    flex: 1;
+  }
+  
+  .selected-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+  
+  .description-container {
+    flex: 1;
+    background-color: rgb(49, 49, 49);
+    color: white;
+    border: 1px solid black;
+    padding: 20px;
+    font-size: 1.2em; /* Tamaño de la letra aumentado */
+    display: flex; /* Para utilizar flexbox */
+    flex-direction: column; /* Alinear los elementos en columna */
+    justify-content: center; /* Centrar verticalmente los elementos */
+  }
+  
+  .description-container p {
+    margin: 10px 0;
+    text-align: center; /* Centrar el texto horizontalmente */
+  }
